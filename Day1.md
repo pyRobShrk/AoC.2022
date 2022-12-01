@@ -1,5 +1,8 @@
 # Day 1
-(4163/3371)
+
+00:07:26  4163
+
+00:09:14  3371
 
 * I copied and pasted the data into Excel. After staring for a few seconds, there was no good way to sum each group.
 * I pasted the data into Notepad++
