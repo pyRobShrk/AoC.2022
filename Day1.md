@@ -13,7 +13,7 @@
 * Copied down to Q235, Part 1 answer (maximum) revealed in status bar
 * Part 2: =SUM(LARGE(Q1:Q235,{1,2,3}))
 
-A more elegant VBA solution has occured to me
+A more elegant VBA solution has occured to me:
 
     Sub aoc22d1()
         [A1].Select
@@ -27,3 +27,16 @@ A more elegant VBA solution has occured to me
             [E2] = .Sum([E1], .Large(sums, 2), .Large(sums, 3))
         End With
     End Sub
+
+Finally, I have a pure Excel formula solution that doesn't require pre-manipulation of the input.
+Paste input in A1.
+
+    C1 =FILTER(ROW(A1:A2238),ISBLANK(A1:A2238))
+    D1 =TAKE(B1#-VSTACK({0},B1#),COUNT(B1#))-1
+    E1 =B1#-C1#-1
+    F1 =SUM(OFFSET($A$1,D1,,C1))
+    Double click F1 to fill down
+    G1 =MAX(F1:F235)
+    G2 =SUM(LARGE(F1:F235,{1,2,3}))
+    
+This could all be in a single LAMBDA, except that the OFFSET function doesn't support array inputs for row and height.
