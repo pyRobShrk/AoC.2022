@@ -25,5 +25,4 @@ A more elegant VBA solution has occured to me
             [E1] = .Max(sums)
             [E2] = .Sum(.Large(sums,Array(1,2,3)))
         End With
-        [E1] =
     End Sub
