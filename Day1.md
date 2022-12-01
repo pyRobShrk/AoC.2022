@@ -32,9 +32,9 @@ Finally, I have a pure Excel formula solution that doesn't require pre-manipulat
 Paste input in A1.
 
     C1 =FILTER(ROW(A1:A2238),ISBLANK(A1:A2238))
-    D1 =TAKE(B1#-VSTACK({0},B1#),COUNT(B1#))-1
-    E1 =B1#-C1#-1
-    F1 =SUM(OFFSET($A$1,D1,,C1))
+    D1 =TAKE(C1#-VSTACK({0},C1#),COUNT(C1#))-1
+    E1 =C1#-D1#-1
+    F1 =SUM(OFFSET($A$1,E1,,D1))
     Double click F1 to fill down
     G1 =MAX(F1:F235)
     G2 =SUM(LARGE(F1:F235,{1,2,3}))
