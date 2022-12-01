@@ -12,3 +12,18 @@
 * In Column Q, formula =SUM(A1:O1)
 * Copied down to Q235, Part 1 answer (maximum) revealed in status bar
 * Part 2: =SUM(LARGE(Q1:Q235,{1,2,3}))
+
+A more elegant VBA solution has occured to me
+
+    Sub aoc22d1()
+        [A1].Paste
+        For Each a in [A:A].Areas
+            [C99].End(xlUp) = WorksheetFunction.Sum(a)
+        Next a
+        Set sums = [C1].CurrentRegion
+        With WorksheetFunction
+            [E1] = .Max(sums)
+            [E2] = .Sum(.Large(sums,Array(1,2,3)))
+        End With
+        [E1] =
+    End Sub
