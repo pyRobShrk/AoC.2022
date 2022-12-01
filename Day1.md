@@ -16,13 +16,15 @@
 A more elegant VBA solution has occured to me
 
     Sub aoc22d1()
-        [A1].Paste
-        For Each a in [A:A].Areas
-            [C99].End(xlUp) = WorksheetFunction.Sum(a)
+        [A1].Select
+        ActiveSheet.Paste
+        For Each a In [A:A].SpecialCells(xlCellTypeConstants).Areas
+            Debug.Print a.Address
+            [C999].End(xlUp).Offset(1) = WorksheetFunction.Sum(a)
         Next a
-        Set sums = [C1].CurrentRegion
+        Set sums = [C2].CurrentRegion
         With WorksheetFunction
             [E1] = .Max(sums)
-            [E2] = .Sum(.Large(sums,Array(1,2,3)))
+            [E2] = .Sum([E1], .Large(sums, 2), .Large(sums, 3))
         End With
     End Sub
