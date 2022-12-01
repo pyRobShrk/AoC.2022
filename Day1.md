@@ -19,7 +19,6 @@ A more elegant VBA solution has occured to me
         [A1].Select
         ActiveSheet.Paste
         For Each a In [A:A].SpecialCells(xlCellTypeConstants).Areas
-            Debug.Print a.Address
             [C999].End(xlUp).Offset(1) = WorksheetFunction.Sum(a)
         Next a
         Set sums = [C2].CurrentRegion
