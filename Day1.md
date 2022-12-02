@@ -39,4 +39,12 @@ Paste input in A1.
     G1 =MAX(F1:F235)
     G2 =SUM(LARGE(F1:F235,{1,2,3}))
     
-This could all be in a single LAMBDA, except that the OFFSET function doesn't support array inputs for row and height.
+This could all be in a single LAMBDA, except that the OFFSET function doesn't support array inputs for row and height...
+
+And finally, almost 24 hours later, I have solved the puzzle with just ONE formula:
+
+    =LET(blankrows,FILTER(ROW(A1:A2238),ISBLANK(A1:A2238)),
+        lengths,TAKE(blankrows-VSTACK({0},blankrows),COUNT(blankrows))-1,
+        offsets,blankrows-lengths-1,
+        sums,BYROW(HSTACK(offsets,lengths),LAMBDA(rw,SUM(OFFSET(A1,INDEX(rw,1),,INDEX(rw,2))))),
+        VSTACK(MAX(sums),SUM(LARGE(sums,{3,2,1}))))
