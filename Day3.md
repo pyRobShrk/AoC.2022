@@ -16,8 +16,7 @@ C'mon Microsoft, at least make case sensitivity an optional argument.
     =LET(input,A1:A300,
         L,LEFT(input,LEN(input)/2),
         R,RIGHT(input,LEN(input)/2),
-        items,BYROW(HSTACK(L,R),LAMBDA(r,
-            matches(INDEX(r,1),INDEX(r,2)))),
+        items,MAP(L,R,LAMBDA(a,b,matches(a,b))),
         pos,CODE(items),
         SUM(IF(pos>96,pos-96,pos-38)))
 
