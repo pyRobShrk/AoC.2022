@@ -8,8 +8,10 @@ Originally I had the UNIQUE() function in matches().
 Apparently Excel considers "U" and "u" to be one unique string.
 C'mon Microsoft, at least make case sensitivity an optional argument.
 
-    chars =LAMBDA(str,MID(str,SEQUENCE(LEN(str)),1))
-    matches =LAMBDA(one,two,CONCAT(IFERROR(MID(two,FIND(chars(one),two),1),"")))
+    chars =LAMBDA(str,
+        MID(str,SEQUENCE(LEN(str)),1))
+    matches =LAMBDA(one,two,
+        CONCAT(IFERROR(MID(two,FIND(chars(one),two),1),"")))
     
     =LET(input,A1:A300,
         L,LEFT(input,LEN(input)/2),
