@@ -11,7 +11,8 @@ Part 1:
         op,CODE(LEFT(input,1)),
         me,CODE(RIGHT(input,1))-23,
         result,me-op,
-        SUM(BYROW(result,LAMBDA(r,IF(OR(r=1,r=-2),6,IF(r=0,3,0))))+me-64))
+        SUM(BYROW(result,LAMBDA(r,
+            IF(OR(r=1,r=-2),6,IF(r=0,3,0))))+me-64))
         
 Part 2:
 
