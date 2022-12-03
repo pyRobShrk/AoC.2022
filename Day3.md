@@ -3,8 +3,8 @@
 
 00:36:03   8055
 
-    CHARS = LAMBDA(str,MID(str,SEQUENCE(LEN(str)),1))
-    MATCHES = =LAMBDA(one,two,CONCAT(IFERROR(MID(two,FIND(chars(one),two),1),"")))
+    CHARS =LAMBDA(str,MID(str,SEQUENCE(LEN(str)),1))
+    MATCHES =LAMBDA(one,two,CONCAT(IFERROR(MID(two,FIND(chars(one),two),1),"")))
     
     =LET(input,A1:A300,
         L,LEFT(input,LEN(input)/2),
