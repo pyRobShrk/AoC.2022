@@ -9,7 +9,8 @@ Day 1:
     =LET(blankrows,FILTER(ROW(A1:A2238),ISBLANK(A1:A2238)),
         lengths,TAKE(blankrows-VSTACK({0},blankrows),COUNT(blankrows))-1,
         offsets,blankrows-lengths-1,
-        sums,BYROW(HSTACK(offsets,lengths),LAMBDA(rw,SUM(OFFSET(A1,INDEX(rw,1),,INDEX(rw,2))))),
+        sums,BYROW(HSTACK(offsets,lengths),LAMBDA(rw,
+            SUM(OFFSET(A1,INDEX(rw,1),,INDEX(rw,2))))),
         VSTACK(MAX(sums),SUM(LARGE(sums,{3,2,1}))))
 
 Day 2:
