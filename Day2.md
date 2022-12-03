@@ -19,8 +19,8 @@ Part 2:
     =LET(input,A1:A2500,
         op,CODE(LEFT(input,1))-64,
         outcome,RIGHT(input,1),
-        score,BYROW(HSTACK(op,outcome),LAMBDA(r,
-            LET(rps,INDEX(r,1),SWITCH(INDEX(r,2),"Y",3+rps,"X",SWITCH(rps,1,3,2,1,3,2),"Z",6+MOD(rps,3)+1)))),
+        score,MAP(op,outcome,LAMBDA(abc,xyz,
+            SWITCH(xyz,"Y",3+abc,"X",SWITCH(abc,1,3,2,1,3,2),"Z",6+MOD(abc,3)+1))),
         SUM(score))
 
 
