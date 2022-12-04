@@ -22,11 +22,11 @@ Day 2:
 
 Day 3:
 
-=LET(input,A1:A300,
-    chars,LAMBDA(str,MID(str,SEQUENCE(LEN(str)),1)),
-    matches,LAMBDA(one,two,CONCAT(IFERROR(MID(two,FIND(chars(one),two),1),""))),
-    pos,CODE(MAP(LEFT(input,LEN(input)/2),RIGHT(input,LEN(input)/2),LAMBDA(a,b,matches(a,b)))),
-    groups,CODE(BYROW(WRAPROWS(input,3),LAMBDA(r,
-        matches(matches(INDEX(r,1),INDEX(r,2)),INDEX(r,3))))),
-    score,LAMBDA(p,SUM(IF(p>96,p-96,p-38))),
-    VSTACK(score(pos),score(groups)))
+    =LET(input,A1:A300,
+        chars,LAMBDA(str,MID(str,SEQUENCE(LEN(str)),1)),
+        matches,LAMBDA(one,two,CONCAT(IFERROR(MID(two,FIND(chars(one),two),1),""))),
+        pos,CODE(MAP(LEFT(input,LEN(input)/2),RIGHT(input,LEN(input)/2),LAMBDA(a,b,matches(a,b)))),
+        groups,CODE(BYROW(WRAPROWS(input,3),LAMBDA(r,
+            matches(matches(INDEX(r,1),INDEX(r,2)),INDEX(r,3))))),
+        score,LAMBDA(p,SUM(IF(p>96,p-96,p-38))),
+        VSTACK(score(pos),score(groups)))
