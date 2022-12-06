@@ -4,6 +4,15 @@ Advent of Code 2022
 
 I'm going to try to use Excel this year. First with [LAMBDA and helpers](https://techcommunity.microsoft.com/t5/excel-blog/announcing-lambda-helper-functions-lambdas-as-arguments-and-more/ba-p/2576648), then maybe [VBA](https://learn.microsoft.com/en-us/office/vba/api/overview/excel) or [Office Scripts](https://learn.microsoft.com/en-us/office/dev/scripts/overview/excel) if needed. If I manage to refactor and solve Part 1 and 2 with a single formula, I'll put it here.
 
+          -------Part 1--------   --------Part 2--------
+    Day       Time  Rank  Score       Time   Rank  Score
+      6   00:05:12  2177      0   00:06:31   2157      0
+      5   00:20:42  2947      0   00:21:51   2246      0
+      4   00:08:35  3682      0   00:10:12   2555      0
+      3   00:08:28  2036      0   00:36:03   8055      0
+      2   00:22:32  9144      0   00:48:22  12329      0
+      1   00:07:26  4163      0   00:09:14   3371      0
+
 Day 1:
 
     =LET(blankrows,FILTER(ROW(A1:A2238),ISBLANK(A1:A2238)),
