@@ -48,3 +48,15 @@ Day 4:
         overlaps,BYROW(data,LAMBDA(rw,LET(a,INDEX(rw,1),b,INDEX(rw,2),c,INDEX(rw,3),d,INDEX(rw,4),
             1*OR(AND(c>=a,d<=b),AND(b<=d,a>=c))+1*NOT(OR(b<c,d<a))))),
         VSTACK(SUM(IF(overlaps=2,1)),SUM(IF(overlaps>0,1))))
+
+Day 6:
+
+    =LET(input,A1,length,LEN(input),
+        fours,MID(input,SEQUENCE(length-3),4),
+        fourteens,MID(input,SEQUENCE(length-13),14),
+        chars,LAMBDA(str,MID(str,SEQUENCE(LEN(str)),1)),
+        matchct,LAMBDA(s,SUM(1*(EXACT(TRANSPOSE(chars(s)),chars(s))))),
+        matches,MAP(fours,matchct),matches2,MAP(fourteens,matchct),
+        VSTACK(MIN(IF(matches=4,SEQUENCE(length-3,,4))),
+            MIN(IF(matches2=14,SEQUENCE(length-13,,14)))))
+
