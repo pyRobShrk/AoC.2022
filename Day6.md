@@ -14,7 +14,7 @@ One of the easiest to implement in Excel, but seemingly difficult to implement i
  
 Drag B5 and C15 down to row 4096. Drag B1 to C1.
 
-Even though it's much uglier, here's a single cell formula for parts 1 and 2:
+I had to overcome an issue using UNIQUE() within MAP(LAMBDA). I think MAP, BYROW, REDUCE, etc have trouble with dyanmic arrays like UNIQUE or unknown amount of iterations/arguments like CONCAT. It seems they want everything to be a fixed size. Even though it's much uglier due to using an EXACT matrix of every character compared to every other character, here's a single cell formula for parts 1 and 2:
 
     =LET(input,A1,length,LEN(input),
         fours,MID(input,SEQUENCE(length-3),4),
