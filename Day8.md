@@ -35,4 +35,25 @@ And that needs to be dragged/copied to CU300. Then the answer to Part 2 is easy 
     =MAX(C203:CU300)
     
 This problem does not lend itself well to Excel's LAMBDA helper functions, because it would be very difficult to do dynamic ranges that go from the middle to the edge.
-I suppose it's possible using [MAKEARRAY](https://support.microsoft.com/en-us/office/makearray-function-b80da5ad-b338-4149-a523-5b221da09097), but it won't be pretty.
+I suppose it's possible using [MAKEARRAY](https://support.microsoft.com/en-us/office/makearray-function-b80da5ad-b338-4149-a523-5b221da09097), but it won't be pretty. Okay, here it goes:
+
+    =LET(chars,LAMBDA(str,MID(str,SEQUENCE(LEN(str)),1)),
+        forest,INT(WRAPROWS(chars(A1),100)),
+        visTrees,MAKEARRAY(97,97,LAMBDA(r,c,
+            LET(cl,INDEX(forest,r+1,c+1),
+            up,INDEX(forest,SEQUENCE(r),c+1),down,INDEX(forest,SEQUENCE(98-r,,r+2),c+1),
+            left,INDEX(forest,r+1,SEQUENCE(,c)),right,INDEX(forest,r+1,SEQUENCE(,98-c,c+2)),
+           1*OR(cl>MAX(up),cl>MAX(down),cl>MAX(right),cl>MAX(left))))),
+        SUM(visTrees)+98*4)
+
+    =LET(chars,LAMBDA(str,MID(str,SEQUENCE(LEN(str)),1)),
+        forest,INT(WRAPROWS(chars(A1),100)),
+        sightDist,LAMBDA(val,rng,asc,
+            LET(d,XMATCH(SEQUENCE(,10-val,9,-1),rng,1,asc),mx,COUNT(rng),IF(asc=1,MIN(IFERROR(d,mx)),mx-MAX(IFERROR(d,1))+1))),
+        treeScore,MAKEARRAY(97,97,LAMBDA(r,c,
+            LET(cl,INDEX(forest,r+1,c+1),
+            up,INDEX(forest,SEQUENCE(r),c+1),down,INDEX(forest,SEQUENCE(98-r,,r+2),c+1),
+            left,INDEX(forest,r+1,SEQUENCE(,c)),right,INDEX(forest,r+1,SEQUENCE(,98-c,c+2)),
+            PRODUCT(sightDist(cl,right,1),sightDist(cl,down,1),sightDist(cl,left,-1),sightDist(cl,up,-1))))),
+        MAX(treeScore))
+
