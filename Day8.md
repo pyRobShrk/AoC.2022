@@ -57,3 +57,20 @@ I suppose it's possible using [MAKEARRAY](https://support.microsoft.com/en-us/of
             PRODUCT(sightDist(cl,right,1),sightDist(cl,down,1),sightDist(cl,left,-1),sightDist(cl,up,-1))))),
         MAX(treeScore))
 
+Cool, so why not put it all in one cell. Sure why not:
+
+    =LET(chars,LAMBDA(str,MID(str,SEQUENCE(LEN(str)),1)),
+        forest,INT(WRAPROWS(chars(A1),100)),
+        visTrees,MAKEARRAY(97,97,LAMBDA(r,c,
+            LET(cl,INDEX(forest,r+1,c+1),
+            up,INDEX(forest,SEQUENCE(r),c+1),down,INDEX(forest,SEQUENCE(98-r,,r+2),c+1),
+            left,INDEX(forest,r+1,SEQUENCE(,c)),right,INDEX(forest,r+1,SEQUENCE(,98-c,c+2)),
+           1*OR(cl>MAX(up),cl>MAX(down),cl>MAX(right),cl>MAX(left))))),
+        sightDist,LAMBDA(val,rng,asc,
+            LET(d,XMATCH(SEQUENCE(,10-val,9,-1),rng,1,asc),mx,COUNT(rng),IF(asc=1,MIN(IFERROR(d,mx)),mx-MAX(IFERROR(d,1))+1))),
+        treeScore,MAKEARRAY(97,97,LAMBDA(r,c,
+            LET(cl,INDEX(forest,r+1,c+1),
+            up,INDEX(forest,SEQUENCE(r),c+1),down,INDEX(forest,SEQUENCE(98-r,,r+2),c+1),
+            left,INDEX(forest,r+1,SEQUENCE(,c)),right,INDEX(forest,r+1,SEQUENCE(,98-c,c+2)),
+            PRODUCT(sightDist(cl,right,1),sightDist(cl,down,1),sightDist(cl,left,-1),sightDist(cl,up,-1))))),
+        VSTACK(SUM(visTrees)+98*4,MAX(treeScore)))
