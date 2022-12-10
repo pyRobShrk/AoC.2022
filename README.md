@@ -80,3 +80,17 @@ Day 8:
             left,INDEX(forest,r+1,SEQUENCE(,c)),right,INDEX(forest,r+1,SEQUENCE(,98-c,c+2)),
             PRODUCT(sightDist(cl,right,1),sightDist(cl,down,1),sightDist(cl,left,-1),sightDist(cl,up,-1))))),
         VSTACK(SUM(visTrees)+98*4,MAX(treeScore)))
+        
+   Day 9:
+
+    =LET(input,A1:A146,
+        vals,IFERROR(VALUE(MID(input,5,5)),0),
+        clock,SCAN(0.01,vals,LAMBDA(a,v,IF(v,a+2,a+1))),
+        x,SCAN(1,vals,LAMBDA(a,v,a+v)),
+        signal,{20,60,100,140,180,220},
+        strength,LOOKUP(signal,clock,x),
+        part1,SUM(signal*strength),
+        grid,SEQUENCE(6,40,0),
+        col,CHOOSEROWS(grid,1,1,1,1,1,1),
+        sprite,LOOKUP(grid+1,clock,x),
+        VSTACK(part1,1*(ABS(col-sprite)<2)))
