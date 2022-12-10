@@ -6,6 +6,7 @@ I'm going to try to use Excel this year. First with [LAMBDA and helpers](https:/
 
           --------Part 1--------   --------Part 2--------
     Day       Time   Rank  Score       Time   Rank  Score
+     10   00:14:22   2244      0   00:29:27   2127      0
       9   00:32:18   4451      0   22:51:22  44520      0
       8   00:16:51   2329      0   15:03:57  49582      0
       7   18:01:20  58751      0   18:06:41  56545      0
@@ -81,16 +82,12 @@ Day 8:
             PRODUCT(sightDist(cl,right,1),sightDist(cl,down,1),sightDist(cl,left,-1),sightDist(cl,up,-1))))),
         VSTACK(SUM(visTrees)+98*4,MAX(treeScore)))
         
-   Day 9:
+   Day 10:
 
-    =LET(input,A1:A146,
-        vals,IFERROR(VALUE(MID(input,5,5)),0),
+    =LET(vals,IFERROR(VALUE(MID(A1:A146,5,5)),0),
         clock,SCAN(0.01,vals,LAMBDA(a,v,IF(v,a+2,a+1))),
         x,SCAN(1,vals,LAMBDA(a,v,a+v)),
-        signal,{20,60,100,140,180,220},
-        strength,LOOKUP(signal,clock,x),
-        part1,SUM(signal*strength),
-        grid,SEQUENCE(6,40,0),
-        col,CHOOSEROWS(grid,1,1,1,1,1,1),
+        signal,{20,60,100,140,180,220}, strength,LOOKUP(signal,clock,x),
+        grid,SEQUENCE(6,40,0), col,CHOOSEROWS(grid,1,1,1,1,1,1),
         sprite,LOOKUP(grid+1,clock,x),
-        VSTACK(part1,1*(ABS(col-sprite)<2)))
+        VSTACK(SUM(signal*strength),1*(ABS(col-sprite)<2)))
