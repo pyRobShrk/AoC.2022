@@ -70,13 +70,13 @@ Day 8:
         forest,INT(WRAPROWS(chars(A1),100)),
         sightDist,LAMBDA(val,rng,asc,
             LET(d,XMATCH(SEQUENCE(,10-val,9,-1),rng,1,asc),mx,COUNT(rng),IF(asc=1,MIN(IFERROR(d,mx)),mx-MAX(IFERROR(d,1))+1))),
-        visTrees,MAKEARRAY(97,97,LAMBDA(r,c,
+        trees,MAKEARRAY(97,97,LAMBDA(r,c,
             LET(cl,INDEX(forest,r+1,c+1),
             up,INDEX(forest,SEQUENCE(r),c+1),down,INDEX(forest,SEQUENCE(98-r,,r+2),c+1),
             left,INDEX(forest,r+1,SEQUENCE(,c)),right,INDEX(forest,r+1,SEQUENCE(,98-c,c+2)),
             score,PRODUCT(sightDist(cl,right,1),sightDist(cl,down,1),sightDist(cl,left,-1),sightDist(cl,up,-1)),
             score*IF(OR(cl>MAX(up),cl>MAX(down),cl>MAX(right),cl>MAX(left)),1,-1)))),
-        VSTACK(SUM(1*(visTrees>0))+98*4,MAX(ABS(visTrees))))
+        VSTACK(SUM(1*(trees>0))+98*4,MAX(ABS(trees))))
         
    Day 10:
 
