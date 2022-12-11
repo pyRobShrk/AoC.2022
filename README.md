@@ -88,6 +88,5 @@ Day 8:
         clock,SCAN(0.01,vals,LAMBDA(a,v,IF(v,a+2,a+1))),
         x,SCAN(1,vals,LAMBDA(a,v,a+v)),
         signal,{20,60,100,140,180,220}, strength,LOOKUP(signal,clock,x),
-        grid,SEQUENCE(6,40,0), col,CHOOSEROWS(grid,1,1,1,1,1,1),
-        sprite,LOOKUP(grid+1,clock,x),
-        VSTACK(SUM(signal*strength),1*(ABS(col-sprite)<2)))
+        grid,SEQUENCE(6,40), sprite,LOOKUP(grid,clock,x),
+        VSTACK(SUM(signal*strength),1*(ABS(MOD(grid,40)-sprite)<2)))
