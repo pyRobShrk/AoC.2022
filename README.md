@@ -81,8 +81,8 @@ Day 8:
    Day 10:
 
     =LET(vals,IFERROR(VALUE(MID(A1:A146,5,5)),0),
-        clock,SCAN(.1,vals,LAMBDA(a,v,IF(v,a+2,a+1))),
+        clock,SCAN(0.1,vals,LAMBDA(a,v,IF(v,a+2,a+1))),
         x,SCAN(1,vals,LAMBDA(a,v,a+v)),
         signal,{20,60,100,140,180,220}, strength,LOOKUP(signal,clock,x),
         grid,SEQUENCE(6,40), sprite,LOOKUP(grid,clock,x),
-        VSTACK(SUM(signal*strength),1*(ABS(MOD(grid,40)-sprite)<2)))
+        VSTACK(SUM(signal*strength),IF(ABS(MOD(grid-1,40)-sprite)<2,"📱","")))
