@@ -15,8 +15,8 @@ Sub aoc22d14_sand()
     Do
         Set grain = grain.End(xlDown).Offset(-1)
         If Not (grain.Offset(1, -1) = "" Or _
-        grain.Offset(1, 0) = "" Or _
-        grain.Offset(1, 1) = "") Then
+                grain.Offset(1, 0) = "" Or _
+                grain.Offset(1, 1) = "") Then
             grain.Value = "o"
             Set grain = Cells(500)
         ElseIf grain.Offset(1, -1) = "" Then
@@ -24,7 +24,6 @@ Sub aoc22d14_sand()
         ElseIf grain.Offset(1, 1) = "" Then
             Set grain = grain.Offset(1, 1)
         End If
-        'grain.Select
     Loop While grain.Row < 200 And Cells(500) = ""
 End Sub
 
