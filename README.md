@@ -6,6 +6,7 @@ I'm going to try to use Excel this year. First with [LAMBDA and helpers](https:/
 
           --------Part 1--------   --------Part 2--------
     Day       Time   Rank  Score       Time   Rank  Score
+     21   12:09:30  14437      0   12:14:13  11169      0
      17   01:39:45   2539      0   16:49:38   7818      0
      15   14:21:42  22720      0          -      -      -
      14   22:23:44  30296      0   23:02:55  29350      0
